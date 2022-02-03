@@ -13,6 +13,8 @@ export default { name: "Nav" };
 
 nav {
   background: $color-primary;
+  max-width: 1679px;
+  width: 100%;
 
   .Title {
     color: $color-white;

@@ -18,14 +18,25 @@ export default {
 
 * {
   box-sizing: border-box;
+  color: $color-primary;
+  letter-spacing: 0px;
   margin: 0;
   padding: 0;
-  color: $color-primary;
+}
+
+*:focus {
+  outline: none;
 }
 
 body {
-  font-family: Nunito, sans-serif;
   background-color: $color-body-background;
+  font-family: Nunito, sans-serif;
   min-width: 200px;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
