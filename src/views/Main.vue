@@ -1,26 +1,23 @@
 <template>
-  <div class="Main">
+  <div class="main">
     <SummaryBar />
   </div>
 </template>
 
-<script>
-import SummaryBar from "@/components/SummaryBar.vue";
+<script lang="ts">
+import { defineComponent } from "vue";
+import SummaryBar from "@/components/summary-bar/SummaryBar.vue";
 
-export default {
+export default defineComponent({
   name: "Home",
   components: { SummaryBar },
-  data() {
-    return { src: "" };
-  },
-  methods: {},
-};
+});
 </script>
 
 <style lang="scss" scoped>
 @import "@/Styles.scss";
 
-.Main {
+.main {
   background: $color-main-background 0% 0% no-repeat padding-box;
   max-width: 1679px;
   width: 100%;

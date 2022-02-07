@@ -3,14 +3,16 @@
   <router-view />
 </template>
 
-<script>
-import Nav from "@/components/Nav.vue";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-export default {
+import Nav from "@/components/nav/Nav.vue";
+
+export default defineComponent({
   components: {
     Nav,
   },
-};
+});
 </script>
 
 <style lang="scss">

@@ -1,10 +1,10 @@
 <template>
   <nav>
-    <div class="Title">weather</div>
+    <div class="title">weather</div>
   </nav>
 </template>
 
-<script>
+<script lang="ts">
 export default { name: "Nav" };
 </script>
 
@@ -16,7 +16,7 @@ nav {
   max-width: 1679px;
   width: 100%;
 
-  .Title {
+  .title {
     color: $color-white;
     font: normal normal 900 35px/47px Nunito;
     letter-spacing: 0px;
@@ -26,7 +26,7 @@ nav {
   @media screen and (min-width: $breakpoint-hero) {
     background: $color-white;
 
-    .Title {
+    .title {
       color: $color-primary;
       padding: $desktop-padding-top $desktop-padding-left;
     }
