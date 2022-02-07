@@ -1,23 +1,25 @@
 <template>
-  <div class="weekly-mobile">
-    <div class="hours">18:00</div>
-    <div class="image-container">
-      <img :src="image.image" class="image" />
-    </div>
-    <div class="temperature">
-      <span class="number">5</span>
-      <span class="symbol">o</span>
-    </div>
-    <div class="text-image-container">
-      <div class="wind-direction">
-        <img :src="windDirection" class="image" />
+  <div class="extended-mobile">
+    <div class="day-summary">
+      <div class="hours">18:00</div>
+      <div class="image-container">
+        <img :src="image.image" class="image" />
       </div>
-      <div class="text">8 ms</div>
+      <div class="temperature">
+        <span class="number">5</span>
+        <span class="symbol">o</span>
+      </div>
+      <div class="text-image-container">
+        <div class="wind-direction">
+          <img :src="windDirection" class="image" />
+        </div>
+        <div class="text">8 ms</div>
+      </div>
     </div>
-  </div>
-  <div class="divider">
-    <div class="text">Tuesday</div>
-    <div class="chevron selected">></div>
+    <div class="divider">
+      <div class="text">Tuesday</div>
+      <div class="chevron selected">></div>
+    </div>
   </div>
 </template>
 
@@ -25,7 +27,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "WeeklyMobile",
+  name: "ExtendedMobile",
   components: {},
   data: () => ({
     image: {
@@ -41,7 +43,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/Styles.scss";
 
-.weekly-mobile {
+.day-summary {
   display: flex;
   align-items: center;
   background: $color-white 0% 0% no-repeat padding-box;
@@ -122,5 +124,8 @@ export default defineComponent({
 }
 
 @media screen and (min-width: $breakpoint-hero) {
+  .extended-mobile {
+    display: none;
+  }
 }
 </style>
