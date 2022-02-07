@@ -1,16 +1,18 @@
 <template>
   <div class="main">
     <SummaryBar />
+    <WeeklyMobile />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import SummaryBar from "@/components/summary-bar/SummaryBar.vue";
+import WeeklyMobile from "@/components/weekly-mobile/WeeklyMobile.vue";
 
 export default defineComponent({
   name: "Home",
-  components: { SummaryBar },
+  components: { SummaryBar, WeeklyMobile },
 });
 </script>
 

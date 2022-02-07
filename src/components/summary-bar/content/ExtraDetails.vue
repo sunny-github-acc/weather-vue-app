@@ -136,6 +136,7 @@ export default defineComponent({
       .detail {
         color: $color-white;
         font: normal normal normal 13px/36px Nunito;
+        white-space: nowrap;
       }
     }
   }
