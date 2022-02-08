@@ -13,22 +13,22 @@ export default { name: "Nav" };
 
 nav {
   background: $color-primary;
-  max-width: 1679px;
+  max-width: $breakpoint-max-width;
   width: 100%;
 
   .title {
     color: $color-white;
     font: normal normal 900 35px/47px Nunito;
     letter-spacing: 0px;
-    padding: $mobile-padding-top $mobile-padding-left;
+    padding: 27px 24px;
   }
 
-  @media screen and (min-width: $breakpoint-hero) {
+  @media screen and (min-width: $breakpoint-desktop) {
     background: $color-white;
 
     .title {
       color: $color-primary;
-      padding: $desktop-padding-top $desktop-padding-left;
+      padding: 33px 52px;
     }
   }
 }

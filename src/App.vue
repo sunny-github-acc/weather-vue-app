@@ -33,7 +33,7 @@ export default defineComponent({
 body {
   background-color: $color-body-background;
   font-family: Nunito, sans-serif;
-  min-width: 200px;
+  min-width: $breakpoint-desktop;
 }
 
 #app {

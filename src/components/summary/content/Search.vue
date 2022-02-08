@@ -41,7 +41,7 @@ $search-icon-width: 21.45px;
     font: normal normal medium 18px/23px Nunito;
   }
 
-  @media screen and (min-width: $breakpoint-hero) {
+  @media screen and (min-width: $breakpoint-desktop) {
     background: $color-white;
     margin: 28px 0 38px;
 

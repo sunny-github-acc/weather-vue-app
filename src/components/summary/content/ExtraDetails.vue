@@ -76,12 +76,16 @@ export default defineComponent({
 
 .extra-details {
   display: flex;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
 
   .extra-detail-column {
     display: flex;
-    flex-wrap: wrap;
-    width: 50%;
+    flex-direction: column;
+    min-width: 155px;
+
+    &:nth-child(1) {
+      margin-right: 30px;
+    }
 
     .detail-container {
       display: flex;
@@ -142,7 +146,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: $breakpoint-hero) {
+@media screen and (min-width: $breakpoint-desktop) {
   .extra-details {
     flex-direction: column;
 
@@ -150,7 +154,7 @@ export default defineComponent({
       width: 100%;
 
       .detail-container {
-        margin-left: 20px;
+        margin: 0 20px;
 
         .image-container {
           margin-right: 9.63px;

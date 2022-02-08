@@ -47,10 +47,11 @@ export default defineComponent({
   display: flex;
   align-items: center;
   background: $color-white 0% 0% no-repeat padding-box;
-  border: 1px solid $color-main-border;
   border-top: none;
-  padding-left: calc($mobile-padding-left - 2px);
+  border: 1px solid $color-main-border;
   height: 102px;
+  padding: 0 22px;
+  white-space: nowrap;
   width: 100%;
 
   .hours {
@@ -104,7 +105,7 @@ export default defineComponent({
   border: 1px solid $color-main-border;
   border-top: none;
   height: 102px;
-  padding: 0 calc($mobile-padding-left - 2px);
+  padding: 0 22px;
 
   .text {
     color: $color-main-time;
@@ -123,7 +124,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: $breakpoint-hero) {
+@media screen and (min-width: $breakpoint-desktop) {
   .extended-mobile {
     display: none;
   }

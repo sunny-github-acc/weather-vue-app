@@ -63,7 +63,7 @@ export default defineComponent({
     }
   }
 
-  @media screen and (min-width: $breakpoint-hero) {
+  @media screen and (min-width: $breakpoint-desktop) {
     .image-container {
       margin: 0 15.03px 0 25px;
     }

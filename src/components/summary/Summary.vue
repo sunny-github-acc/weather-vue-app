@@ -28,16 +28,14 @@ $search-icon-width: 21.45px;
 
 .summary {
   background: $color-primary;
-  padding: 0 calc($mobile-padding-left - 1px) 50px
-    calc($mobile-padding-left - 2px);
+  padding: 0 23px 50px 22px;
   width: 100%;
 
-  @media screen and (min-width: $breakpoint-hero) {
+  @media screen and (min-width: $breakpoint-desktop) {
     border-radius: 13px;
-    padding: 0 calc($mobile-padding-left - 5px) 50px
-      calc($mobile-padding-left + 1px);
+    padding: 0 19px 50px 25px;
     width: 374px;
-    height: 635.5px;
+    height: 100%;
   }
 }
 </style>

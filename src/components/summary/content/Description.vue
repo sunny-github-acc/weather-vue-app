@@ -19,7 +19,7 @@ export default defineComponent({
   margin: 0 0 40px;
   padding: 0 3px;
 
-  @media screen and (min-width: $breakpoint-hero) {
+  @media screen and (min-width: $breakpoint-desktop) {
     padding: 0 21px;
   }
 }
