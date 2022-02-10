@@ -1,6 +1,6 @@
 <template>
   <div class="summary">
-    <Search />
+    <Search @search-location="searchLocation" />
     <Details />
     <Description />
     <ExtraDetails />
@@ -18,6 +18,12 @@ import ExtraDetails from "@/components/summary/content/ExtraDetails.vue";
 export default defineComponent({
   name: "SummaryBar",
   components: { Search, Details, Description, ExtraDetails },
+  methods: {
+    searchLocation(input: string) {
+      this.$emit("search-location", input);
+    },
+  },
+  emits: ["search-location"],
 });
 </script>
 
@@ -28,7 +34,7 @@ $search-icon-width: 21.45px;
 
 .summary {
   background: $color-primary;
-  padding: 0 23px 50px 22px;
+  padding: 0 22px 50px 23px;
   width: 100%;
 
   @media screen and (min-width: $breakpoint-desktop) {

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Summary />
+    <Summary @search-location="searchLocation" />
     <ExtendedMobile />
     <ExtendedDesktop />
   </div>
@@ -15,6 +15,18 @@ import ExtendedDesktop from "@/components/extended-desktop/ExtendedDesktop.vue";
 export default defineComponent({
   name: "Home",
   components: { Summary, ExtendedMobile, ExtendedDesktop },
+  data: () => ({
+    url: "http://localhost:8080/v1/places/vilnius",
+    errorMessage: "",
+  }),
+  methods: {
+    searchLocation(input: string) {
+      console.log(
+        "🚀 ~ file: Main.vue ~ line 24 ~ searchLocation ~ input",
+        input
+      );
+    },
+  },
 });
 </script>
 

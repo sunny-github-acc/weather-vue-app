@@ -79,7 +79,7 @@ export default defineComponent({
         background-color: $color-white;
         border-right: 1px solid $color-main-border;
         border-bottom: 1px solid $color-main-border;
-        color: $color-main-time;
+        color: $color-primary-text;
         font: normal normal bold 15px/20px Nunito;
         height: 107px;
 
@@ -205,7 +205,7 @@ export default defineComponent({
             position: absolute;
             left: -77px;
             top: calc(50% - 10px);
-            color: $color-main-time;
+            color: $color-primary-text;
             font: normal normal bold 15px/20px Nunito;
             height: 20px;
             text-align: center;
@@ -261,7 +261,7 @@ export default defineComponent({
         flex-direction: column;
 
         & * {
-          color: $color-main-time;
+          color: $color-primary-text;
           font: normal normal bold 15px/20px Nunito;
         }
       }

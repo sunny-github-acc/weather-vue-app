@@ -55,7 +55,7 @@ export default defineComponent({
   width: 100%;
 
   .hours {
-    color: $color-main-time;
+    color: $color-primary-text;
     font: normal normal bold 15px/20px Nunito;
     margin-right: 38px;
   }
@@ -108,12 +108,12 @@ export default defineComponent({
   padding: 0 22px;
 
   .text {
-    color: $color-main-time;
+    color: $color-primary-text;
     font: normal normal bold 18px/24px Nunito;
   }
 
   .chevron {
-    color: $color-main-time;
+    color: $color-primary-text;
     font: normal normal bold 25px/25px Nunito;
     transform: rotate(90deg);
     transition: all 0.3sec;
