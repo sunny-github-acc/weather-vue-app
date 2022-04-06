@@ -4,7 +4,9 @@
       <img :src="image" class="image" />
     </div>
     <div class="temperature">
-      <p class="number">5</p>
+      <p class="number">
+        {{ shortForecast && Math.round(shortForecast.airTemperature) }}
+      </p>
       <p class="symbol">o</p>
     </div>
   </div>
@@ -13,17 +15,21 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import { IForecastForecastTimestamps } from "@/models/Models";
+
 export default defineComponent({
   name: "Details",
-  data: () => ({
-    image: require("@/assets/images/day/clear.png"),
-  }),
-  methods: {
-    getImgUrl(image: string) {
-      return require(image);
+  data: () => ({}),
+  computed: {
+    image() {
+      return require("@/assets/images/day/" +
+        this.shortForecast?.conditionCode +
+        ".png");
     },
-    setImage(): void {
-      this.image = require("@/assets/images/day/fog.png");
+  },
+  props: {
+    shortForecast: {
+      type: Object as () => IForecastForecastTimestamps,
     },
   },
 });
@@ -34,7 +40,7 @@ export default defineComponent({
 
 .details {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 24px;
 
   .image-container {

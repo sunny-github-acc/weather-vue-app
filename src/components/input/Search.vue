@@ -1,44 +1,58 @@
 <template>
-  <input
-    :class="'input ' + isExtention"
-    v-model="input"
-    @focus="fetchAndSetPlaces"
-    type="text"
-    placeholder="Vilnius"
-  />
-  <button class="search-button" @click="searchLocation" />
-  <div
-    v-if="filteredPlaces.length > 0 || errorMessage"
-    class="input-extentions-container"
-  >
-    <div class="input-extentions">
-      <div
-        v-for="{ code: place } in filteredPlaces"
-        :key="place"
-        class="extention"
-        @click="pickLocation(place)"
-      >
-        <span class="not-matching-input">{{ placeSuggestion(place, 0) }}</span>
-        <span class="matching-input">{{ location }}</span>
-        <span class="not-matching-input">{{ placeSuggestion(place, 1) }}</span>
+  <div class="search">
+    <input
+      type="text"
+      v-model="input"
+      v-on:keyup.enter="searchLocation"
+      :class="'input ' + isExtention"
+      :placeholder="location"
+      @blur="clearSuggestions"
+    />
+    <button
+      class="search-button"
+      :class="loading ? 'loading' : null"
+      @click="searchLocation"
+    />
+    <div
+      v-if="filteredPlaces.length > 0 || errorMessage"
+      class="input-extention-container"
+    >
+      <div class="input-extention" v-if="!errorMessage">
+        <div
+          v-for="{ code: place } in filteredPlaces"
+          class="extention"
+          :key="place"
+          @mousedown.prevent=""
+          @click="pickLocation(place)"
+        >
+          <span class="not-matching-input">{{
+            placeSuggestion(place, 0)
+          }}</span>
+          <span class="matching-input">{{ location }}</span>
+          <span class="not-matching-input">{{
+            placeSuggestion(place, 1)
+          }}</span>
+        </div>
       </div>
+      <div v-if="errorMessage" class="input-extention">{{ errorMessage }}</div>
     </div>
-    <div class="input-extentions">{{ errorMessage }}</div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import { fetchPlaces } from "@/api/API";
+import { IPlaces } from "@/models/Models";
+
 export default defineComponent({
   name: "SearchBar",
   data: () => ({
     input: "",
-    location: "",
-    places: [],
-    filteredPlaces: [],
+    location: "Klaipeda",
+    places: [] as IPlaces[],
+    filteredPlaces: [] as IPlaces[],
     url: "http://localhost:8080/v1/places",
-    errorMessage: "",
     timeout: 0,
   }),
   computed: {
@@ -48,32 +62,35 @@ export default defineComponent({
         : "";
     },
   },
+  created: function () {
+    if (this.places.length === 0) {
+      fetchPlaces(this.url).then(({ data }) => {
+        if (data) {
+          this.places = data;
+        } else {
+          this.setErrorMessage("We have a connection problem..");
+        }
+      });
+    }
+  },
   methods: {
-    async fetchAndSetPlaces() {
-      fetch(this.url)
-        .then(async (response) => {
-          const data = await response.json();
-
-          if (typeof data === "object") {
-            this.places = data;
-            this.errorMessage = "";
-          }
-        })
-        .catch(() => {
-          this.errorMessage = "Oops.. something went wrong";
-        });
+    clearSuggestions() {
+      setTimeout(() => (this.filteredPlaces = []), 0);
+      setTimeout(() => this.setErrorMessage(""), 0);
     },
     filterPlaces() {
-      this.filteredPlaces = this.places.filter(
-        ({ code }: { code: string }) =>
-          code.includes(this.input) && this.input !== ""
-      );
+      this.filteredPlaces = this.places
+        .filter(
+          ({ code }: { code: string }) =>
+            code.includes(this.input) && this.input !== ""
+        )
+        .sort((a, b) => a.name.length - b.name.length);
       this.location = this.input;
 
       if (this.filteredPlaces.length > 0 || this.input === "") {
-        this.errorMessage = "";
+        this.setErrorMessage("");
       } else {
-        this.errorMessage = "We could not find this location";
+        this.setErrorMessage("We could not find this location");
       }
     },
     placeSuggestion(place: string, number: number) {
@@ -85,9 +102,15 @@ export default defineComponent({
     pickLocation(place: string) {
       this.input = this.location = place;
       this.filteredPlaces = [];
+      this.searchLocation();
     },
     searchLocation() {
-      this.$emit("search-location", this.input);
+      if (this.input) {
+        this.$emit("search-location", this.input);
+      }
+    },
+    setErrorMessage(message: string) {
+      this.$emit("set-error-message", message);
     },
     debounce(callback: () => void) {
       if (this.timeout) {
@@ -98,10 +121,16 @@ export default defineComponent({
       }, 500);
     },
   },
-  emits: ["search-location"],
+  props: {
+    loading: { type: Boolean },
+    errorMessage: { type: String },
+  },
+  emits: ["search-location", "set-error-message"],
   watch: {
     input: {
-      handler: function () {
+      handler() {
+        this.setErrorMessage("");
+
         if (this.input !== this.location) {
           this.debounce(this.filterPlaces);
         }
@@ -116,6 +145,22 @@ export default defineComponent({
 
 $search-icon-width: 21.45px;
 $input-margin-bottom: 38px;
+
+.search {
+  background: $color-primary;
+  padding: 0 22px 0 23px;
+  margin-top: -1px;
+  width: 100%;
+
+  @media screen and (min-width: $breakpoint-desktop) {
+    border-radius: 13px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0 19px 0 25px;
+    width: 374px;
+    height: 100%;
+  }
+}
 
 .input {
   background: $color-white 0% 0% no-repeat padding-box;
@@ -157,20 +202,30 @@ $input-margin-bottom: 38px;
   height: $search-icon-width;
   margin-left: calc(0px - 13px - $search-icon-width);
   width: $search-icon-width;
+
+  &.loading {
+    animation: rotation 1s infinite linear;
+
+    @keyframes rotation {
+      100% {
+        transform: rotatey(360deg);
+      }
+    }
+  }
 }
 
-.input-extentions-container {
+.input-extention-container {
   position: relative;
   top: calc(0px - $input-margin-bottom - 6.5px);
 
-  .input-extentions {
+  .input-extention {
     position: absolute;
     background-color: $color-white;
     border-radius: 0px 0px 13px 13px;
     border-top: 1px solid $color-main-border;
     max-height: 111px;
     overflow: scroll;
-    padding: 12px 0 8px 21px;
+    padding: 8px 0 8px 21px;
     width: 100%;
 
     &,
@@ -178,6 +233,11 @@ $input-margin-bottom: 38px;
       color: $color-primary-text;
       font: normal normal bold 18px/30px Nunito;
       transition: all 0.3s;
+    }
+
+    &::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
     }
 
     .extention {
@@ -199,7 +259,7 @@ $input-margin-bottom: 38px;
   }
 
   @media screen and (min-width: $breakpoint-desktop) {
-    .input-extentions {
+    .input-extention {
       padding-left: 29px;
     }
   }

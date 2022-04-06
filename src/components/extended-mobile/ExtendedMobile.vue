@@ -26,6 +26,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import { IForecast, IForecastForecastTimestamps } from "@/models/Models";
+
 export default defineComponent({
   name: "ExtendedMobile",
   components: {},
@@ -37,6 +39,20 @@ export default defineComponent({
     },
     windDirection: require("@/assets/images/details/wind-direction-dark.png"),
   }),
+  methods: {
+    show() {
+      console.log(this.shortForecast);
+      console.log(this.longForecast);
+    },
+  },
+  props: {
+    longForecast: {
+      type: Object as () => IForecast,
+    },
+    shortForecast: {
+      type: Object as () => IForecastForecastTimestamps,
+    },
+  },
 });
 </script>
 

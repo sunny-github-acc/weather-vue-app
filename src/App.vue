@@ -20,10 +20,10 @@ export default defineComponent({
 
 * {
   box-sizing: border-box;
-  color: $color-primary;
-  letter-spacing: 0px;
   margin: 0;
   padding: 0;
+  color: $color-primary;
+  letter-spacing: 0px;
 }
 
 *:focus {
@@ -33,7 +33,6 @@ export default defineComponent({
 body {
   background-color: $color-body-background;
   font-family: Nunito, sans-serif;
-  min-width: $breakpoint-desktop;
 }
 
 #app {

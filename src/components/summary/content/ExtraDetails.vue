@@ -9,7 +9,10 @@
         <div :class="'image-container ' + detail.id">
           <img class="image" :src="detail.image" />
         </div>
-        <div class="detail">{{ detail.title }}: 6ms</div>
+        <div class="detail">
+          {{ detail.title }}: {{ shortForecast && shortForecast[detail.type]
+          }}{{ detail.measurment }}
+        </div>
       </div>
     </div>
     <div class="extra-detail-column">
@@ -21,13 +24,17 @@
         <div :class="'image-container ' + detail.id">
           <img class="image" :src="detail.image" />
         </div>
-        <div class="detail">{{ detail.title }}: 6ms</div>
+        <div class="detail">
+          {{ detail.title }}: {{ shortForecast && shortForecast[detail.type]
+          }}{{ detail.measurment }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { IForecast, IForecastForecastTimestamps } from "@/models/Models";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -38,16 +45,22 @@ export default defineComponent({
         image: require("@/assets/images/details/wind-speed.png"),
         id: "wind-speed",
         title: "Wind speed",
+        type: "windSpeed" as const,
+        measurment: "ms",
       },
       {
         image: require("@/assets/images/details/wind-gust.png"),
         id: "wind-gust",
         title: "Wind gust",
+        type: "windGust" as const,
+        measurment: "ms",
       },
       {
         image: require("@/assets/images/details/wind-direction.png"),
         id: "wind-direction",
         title: "Wind direction",
+        type: "windDirection" as const,
+        measurment: "",
       },
     ],
     detailsColumnTwo: [
@@ -55,19 +68,33 @@ export default defineComponent({
         image: require("@/assets/images/details/cloud-cover.png"),
         id: "cloud-cover",
         title: "Cloud cover",
+        type: "cloudCover" as const,
+        measurment: "%",
       },
       {
         image: require("@/assets/images/details/sea-level-pressure.png"),
         id: "sea-level-pressure",
         title: "Sea level pressure",
+        type: "seaLevelPressure" as const,
+        measurment: "",
       },
       {
         image: require("@/assets/images/details/total-precipitation.png"),
         id: "total-precipitation",
         title: "Total precipitation",
+        type: "totalPrecipitation" as const,
+        measurment: "",
       },
     ],
   }),
+  props: {
+    longForecast: {
+      type: Object as () => IForecast,
+    },
+    shortForecast: {
+      type: Object as () => IForecastForecastTimestamps,
+    },
+  },
 });
 </script>
 
