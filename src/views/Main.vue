@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <Search
-      :loading="nextLoading"
       :error-message="errorMessage"
+      :loading="nextLoading"
       @search-location="searchLocation"
       @set-error-message="setErrorMessage"
     />
@@ -10,7 +10,6 @@
       v-if="!initialLoading"
       :longForecast="longForecast"
       :shortForecast="shortForecast"
-      :loading="nextLoading"
       @search-location="searchLocation"
     />
     <ExtendedMobile

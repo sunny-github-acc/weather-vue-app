@@ -39,3 +39,7 @@ interface IForecastPlaceCoordinates {
   latitude: number;
   longitude: number;
 }
+
+export interface IBooleanObject {
+  [key: string]: boolean;
+}
