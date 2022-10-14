@@ -1,23 +1,29 @@
 <template>
   <div class="main">
-    <Search
-      :error-message="errorMessage"
-      :loading="nextLoading"
-      @search-location="searchLocation"
-      @set-error-message="setErrorMessage"
-    />
-    <Summary
-      v-if="!initialLoading"
-      :longForecast="longForecast"
-      :shortForecast="shortForecast"
-      @search-location="searchLocation"
-    />
+    <div>
+      <Search
+        :error-message="errorMessage"
+        :loading="nextLoading"
+        @search-location="searchLocation"
+        @set-error-message="setErrorMessage"
+      />
+      <Summary
+        v-if="!initialLoading"
+        :longForecast="longForecast"
+        :shortForecast="shortForecast"
+        @search-location="searchLocation"
+      />
+    </div>
     <ExtendedMobile
       v-if="!initialLoading"
-      :longForecast="longForecast"
+      :stamps="stamps"
       :shortForecast="shortForecast"
     />
-    <ExtendedDesktop v-if="!initialLoading" />
+    <ExtendedDesktop
+      v-if="!initialLoading"
+      :stamps="stamps"
+      :shortForecast="shortForecast"
+    />
   </div>
   <div v-if="initialLoading" class="loader animation">
     <div class="title">weather</div>
@@ -57,6 +63,36 @@ export default defineComponent({
     initialLoading: true,
     nextLoading: false,
   }),
+  computed: {
+    stamps() {
+      const day = new Date().getDay();
+      const groupedStamps = [] as IForecastForecastTimestamps[][];
+      const filteredStamps =
+        this.longForecast?.forecastTimestamps.filter(
+          (stamp) =>
+            (this.shortForecast?.forecastTimeUtc || 0) <
+              stamp.forecastTimeUtc && this.isValidHours(stamp.forecastTimeUtc)
+        ) || [];
+
+      filteredStamps.forEach((stamps) => {
+        const stampDay = new Date(stamps.forecastTimeUtc).getDay();
+        const isEmpty = !groupedStamps[stampDay];
+        isEmpty && (groupedStamps[stampDay] = [stamps]);
+        !isEmpty && groupedStamps[stampDay].push(stamps);
+      });
+
+      groupedStamps[day] = groupedStamps[day].filter(
+        ({ forecastTimeUtc }) =>
+          new Date().getDate() === new Date(forecastTimeUtc).getDate()
+      );
+
+      const sortedStamps = groupedStamps.map(
+        (_, index) => groupedStamps[(index + day) % 7]
+      );
+
+      return sortedStamps;
+    },
+  },
   methods: {
     searchLocation(input: string) {
       this.nextLoading = true;
@@ -83,6 +119,9 @@ export default defineComponent({
     setErrorMessage(message: string) {
       this.errorMessage = message;
     },
+    isValidHours(time: string) {
+      return [2, 6, 10, 14, 18, 22].includes(new Date(time).getHours());
+    },
   },
   beforeMount() {
     this.searchLocation("klaipeda");
@@ -100,10 +139,15 @@ export default defineComponent({
 
   @media screen and (min-width: $breakpoint-desktop) {
     display: flex;
+    align-items: center;
     flex-direction: column;
     padding: 31px 44px;
-    overflow: scroll;
   }
+  @media screen and (min-width: 1400px) {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
 }
 
 .loader {

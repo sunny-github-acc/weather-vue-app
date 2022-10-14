@@ -42,6 +42,7 @@
             conditionCode,
             airTemperature,
             windDirection,
+            windSpeed,
           } in stamp"
           :key="forecastTimeUtc"
           class="weekdays"
@@ -65,7 +66,7 @@
                   class="image wind-direction"
                 />
               </div>
-              <div class="text">8 ms</div>
+              <div class="text">{{ windSpeed }} ms</div>
             </div>
           </div>
         </div>
@@ -107,37 +108,6 @@ export default defineComponent({
     this.isWeekdays[new Date().getDay() % 7] = true;
     this.isWeekdays[(new Date().getDay() + 1) % 7] = true;
   },
-  computed: {
-    stamps() {
-      const groupedStamps = [] as IForecastForecastTimestamps[][];
-      const filteredStamps =
-        this.longForecast?.forecastTimestamps.filter(
-          (stamp) =>
-            (this.shortForecast?.forecastTimeUtc || 0) <
-              stamp.forecastTimeUtc && this.isValidHours(stamp.forecastTimeUtc)
-        ) || [];
-
-      filteredStamps.forEach((stamps) => {
-        const day = new Date(stamps.forecastTimeUtc).getDay();
-        const isEmpty = !groupedStamps[day];
-        isEmpty && (groupedStamps[day] = [stamps]);
-        !isEmpty && groupedStamps[day].push(stamps);
-      });
-
-      groupedStamps[new Date().getDay()] = groupedStamps[
-        new Date().getDay()
-      ].filter(
-        ({ forecastTimeUtc }) =>
-          new Date().getDate() === new Date(forecastTimeUtc).getDate()
-      );
-
-      const sortedStamps = groupedStamps.map(
-        (_, index) => groupedStamps[(index + new Date().getDay()) % 7]
-      );
-
-      return sortedStamps;
-    },
-  },
   methods: {
     handleHiddenDays(time: string, index: number) {
       this.isWeekdays[new Date(time).getDay()] =
@@ -160,16 +130,11 @@ export default defineComponent({
     getImage(conditionCode: string) {
       return require(`@/assets/images/day/${conditionCode}.png`);
     },
-    isValidHours(time: string) {
-      return [2, 6, 10, 14, 18, 22].includes(new Date(time).getHours());
-    },
   },
   props: {
-    longForecast: {
-      type: Object as () => IForecast,
-    },
-    shortForecast: {
-      type: Object as () => IForecastForecastTimestamps,
+    stamps: {
+      type: Object as () => IForecastForecastTimestamps[][],
+      required: true,
     },
   },
 });

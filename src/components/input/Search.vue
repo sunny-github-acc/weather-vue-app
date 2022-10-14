@@ -1,12 +1,11 @@
 <template>
   <div class="search">
     <input
-      type="text"
       v-model="input"
       v-on:keyup.enter="searchLocation"
       :class="'input ' + isExtention"
-      :placeholder="location"
       @blur="clearSuggestions"
+      type="text"
     />
     <button
       class="search-button"
@@ -224,7 +223,7 @@ $input-margin-bottom: 38px;
     border-radius: 0px 0px 13px 13px;
     border-top: 1px solid $color-main-border;
     max-height: 111px;
-    overflow: scroll;
+    overflow: auto;
     padding: 8px 0 8px 21px;
     width: 100%;
 
