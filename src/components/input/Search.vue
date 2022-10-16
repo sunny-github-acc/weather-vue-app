@@ -147,17 +147,21 @@ $input-margin-bottom: 38px;
 
 .search {
   background: $color-primary;
-  padding: 0 22px 0 23px;
+  padding: 0 30px 0;
   margin-top: -1px;
   width: 100%;
 
-  @media screen and (min-width: $breakpoint-desktop) {
+  @media screen and (min-width: $breakpoint-medium) {
     border-radius: 13px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     padding: 0 19px 0 25px;
-    width: 374px;
+    width: 65%;
     height: 100%;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    width: 374px;
   }
 }
 
@@ -168,6 +172,7 @@ $input-margin-bottom: 38px;
   color: $color-search-placeholder;
   font-size: 20px;
   height: 38px;
+  max-width: 650px;
   line-height: 23px;
   margin: 0 0 $input-margin-bottom 0;
   padding: 18px 21px;
@@ -182,7 +187,7 @@ $input-margin-bottom: 38px;
     font: normal normal medium 18px/23px Nunito;
   }
 
-  @media screen and (min-width: $breakpoint-desktop) {
+  @media screen and (min-width: $breakpoint-medium) {
     background: $color-white;
     margin: 28px 0 38px;
     padding: 18px 29px;
@@ -257,7 +262,7 @@ $input-margin-bottom: 38px;
     }
   }
 
-  @media screen and (min-width: $breakpoint-desktop) {
+  @media screen and (min-width: $breakpoint-medium) {
     .input-extention {
       padding-left: 29px;
     }

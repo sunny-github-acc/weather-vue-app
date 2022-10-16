@@ -42,14 +42,31 @@ $search-icon-width: 21.45px;
 
 .summary {
   background: $color-primary;
-  padding: 0 22px 50px 23px;
+  width: 100%;
+  padding: 0 30px 50px;
   margin-top: -1px;
 
-  @media screen and (min-width: $breakpoint-desktop) {
+  div {
+    @media screen and (min-width: $breakpoint-medium) {
+      // display: none;
+    }
+  }
+
+  div {
+    @media screen and (min-width: $breakpoint-large) {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: $breakpoint-medium) {
+    width: 65%;
+    padding: 0 19px 50px 25px;
     border-radius: 13px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    padding: 0 19px 50px 25px;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
     width: 374px;
     height: 100%;
   }

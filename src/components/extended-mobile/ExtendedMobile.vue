@@ -26,7 +26,7 @@
           "
           class="chevron"
         >
-          >
+          <img :src="chevron" />
         </div>
       </div>
       <div
@@ -90,6 +90,7 @@ export default defineComponent({
   components: {},
   data: () => ({
     windDirectionSrc: require("@/assets/images/details/wind-direction-dark.png"),
+    chevron: require("@/assets/images/arrow/arrow.png"),
     lastHour: 0,
     weekday: "",
     weekdays: [
@@ -160,7 +161,7 @@ export default defineComponent({
   align-items: center;
   justify-content: space-between;
   height: 102px;
-  padding: 0 22px;
+  padding: 0 30px;
   background: $color-white 0% 0% no-repeat padding-box;
   border-top: none;
   border: 1px solid $color-main-border;
@@ -173,6 +174,11 @@ export default defineComponent({
 
   .image-container {
     width: 28.8px;
+    display: none;
+
+    @media screen and (min-width: $breakpoint-mini) {
+      display: block;
+    }
   }
 
   .temperature {
@@ -204,6 +210,10 @@ export default defineComponent({
       font: normal normal bold 15px/25px Nunito;
     }
   }
+
+  @media screen and (min-width: $breakpoint-small) {
+    padding-right: 20%;
+  }
 }
 
 .divider {
@@ -226,6 +236,11 @@ export default defineComponent({
     transform: rotate(90deg);
     transition: all 0.3s;
 
+    img {
+      height: 35px;
+    color: $color-primary-text;
+    }
+
     &.selected {
       transform: rotate(270deg);
       transition: all 0.3s;
@@ -233,7 +248,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: $breakpoint-desktop) {
+@media screen and (min-width: $breakpoint-medium) {
   .extended-mobile {
     display: none;
   }

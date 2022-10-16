@@ -20,10 +20,10 @@ nav {
     color: $color-white;
     font: normal normal 900 35px/47px Nunito;
     letter-spacing: 0px;
-    padding: 27px 24px;
+    padding: 27px 30px;
   }
 
-  @media screen and (min-width: $breakpoint-desktop) {
+  @media screen and (min-width: $breakpoint-medium) {
     background: $color-white;
 
     .title {

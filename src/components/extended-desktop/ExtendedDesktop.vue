@@ -131,11 +131,12 @@ export default defineComponent({
   display: none;
 }
 
-@media screen and (min-width: $breakpoint-desktop) {
+@media screen and (min-width: $breakpoint-medium) {
   .extended-desktop {
     display: unset;
     flex-grow: 1;
-    min-width: $breakpoint-desktop;
+    width: 100%;
+    min-width: $breakpoint-medium;
     margin-left: 15px;
     padding: 0 43px 51px 137px;
     overflow: auto;

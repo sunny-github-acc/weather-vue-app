@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div>
+    <div class="search-conatainer">
       <Search
         :error-message="errorMessage"
         :loading="nextLoading"
@@ -137,13 +137,30 @@ export default defineComponent({
   max-width: $breakpoint-max-width;
   background: $color-main-background 0% 0% no-repeat padding-box;
 
-  @media screen and (min-width: $breakpoint-desktop) {
+  .search-conatainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+  @media screen and (min-width: $breakpoint-medium) {
+    margin-left: 24%;
+  }
+
+  @media screen and (min-width: $breakpoint-large) {
+    width: unset;
+    margin-left: 0;
+  }
+  }
+
+  @media screen and (min-width: $breakpoint-medium) {
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: 100%;
     padding: 31px 44px;
   }
-  @media screen and (min-width: 1400px) {
+
+  @media screen and (min-width: $breakpoint-large) {
     align-items: flex-start;
     flex-direction: row;
   }
@@ -197,7 +214,7 @@ export default defineComponent({
     }
   }
 
-  @media screen and (min-width: $breakpoint-desktop) {
+  @media screen and (min-width: $breakpoint-medium) {
     padding-bottom: 10%;
   }
 }

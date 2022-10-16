@@ -173,13 +173,11 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: $breakpoint-desktop) {
+@media screen and (min-width: $breakpoint-medium) {
   .extra-details {
-    flex-direction: column;
+    flex-wrap: nowrap;
 
     .extra-detail-column {
-      width: 100%;
-
       .detail-container {
         margin: 0 20px;
 

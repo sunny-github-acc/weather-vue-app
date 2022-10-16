@@ -29,13 +29,15 @@ export default defineComponent({
   font: normal normal bold 25px/34px Nunito;
   margin: 0 0 40px;
   padding: 0 3px;
+}
 
-  .location {
-    text-transform: capitalize;
-  }
-
-  @media screen and (min-width: $breakpoint-desktop) {
+.description {
+  @media screen and (min-width: $breakpoint-medium) {
     padding: 0 21px;
   }
+}
+
+.location {
+  text-transform: capitalize;
 }
 </style>
