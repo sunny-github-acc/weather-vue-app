@@ -51,7 +51,7 @@ export default defineComponent({
     location: "Klaipeda",
     places: [] as IPlaces[],
     filteredPlaces: [] as IPlaces[],
-    url: "http://localhost:8080/v1/places",
+    url: "https://pulu-weather.netlify.app/v1/places",
     timeout: 0,
   }),
   computed: {

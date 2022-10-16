@@ -55,7 +55,7 @@ export default defineComponent({
     Summary,
   },
   data: () => ({
-    url: ["http://localhost:8080/v1/places/", "/forecasts/long-term"],
+    url: ["https://pulu-weather.netlify.app/v1/places/", "/forecasts/long-term"],
     image: require("@/assets/images/day/clear.png"),
     errorMessage: "",
     longForecast: {} as IForecast,
