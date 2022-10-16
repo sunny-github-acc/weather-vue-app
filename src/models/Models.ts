@@ -24,6 +24,7 @@ export interface IForecastForecastTimestamps {
   windGust: number;
   windSpeed: number;
   location: string;
+  isNow?: boolean;
 }
 
 interface IForecastPlace {

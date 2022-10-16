@@ -14,8 +14,10 @@
             airTemperature,
             windDirection,
             windSpeed,
+            isNow,
           } in computedStamps"
         :key="'stamps' + forecastTimeUtc"
+        :class="isNow ? 'now' : ''"
         :style="cssDays"
         class="thumb"
       >
@@ -51,8 +53,8 @@ export default defineComponent({
   name: "ExtendedDesktop",
   components: {},
   data: () => ({
-    hours: ["06:00", "10:00", "14:00", "18:00", "22:00", "02:00"],
-    days: ["'Mon'", "'Tue'", "'Wen'", "'Thu'", "'Fri'", "'Sat'", "'Sun'"],
+    hours: [ "02:00", "06:00", "10:00", "14:00", "18:00", "22:00" ],
+    days: [ "'Mon'", "'Tue'", "'Wen'", "'Thu'", "'Fri'", "'Sat'", "'Sun'" ],
     months: [
       "January",
       "February",
@@ -79,14 +81,22 @@ export default defineComponent({
     computedStamps() {
       const templateArray = new Array(7).fill([2, 6, 10, 14, 18, 22]);
       let lastStamp = this.stamps[0][0];
+      let isNowSet = false;
       const result = templateArray.map((template, indexPrimary) => {
         let indexSecondary = 0;
         const templateResult: IForecastForecastTimestamps[] = template.map((hour: number) => {
           this.stamps[indexPrimary][indexSecondary] ? lastStamp = this.stamps[indexPrimary][indexSecondary] : null;
-          if (hour === new Date(lastStamp.forecastTimeUtc).getHours()) {
+          const hours = new Date().getHours();
+          const lastStampHours = new Date(lastStamp.forecastTimeUtc).getHours();
+          let isNow = false;
+          if (hour === lastStampHours) {
             indexSecondary = indexSecondary + 1;
           }
-          return lastStamp;
+          if (hours < hour && !isNowSet) {
+              isNow = true;
+              isNowSet = true;
+          }
+          return { ...lastStamp, isNow };
         });
         return templateResult;
       });
@@ -239,6 +249,15 @@ export default defineComponent({
           }
         }
 
+        &.now::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 10px;
+          background: $color-primary;
+        }
+
         &:nth-last-child(1),
         &:nth-last-child(7),
         &:nth-last-child(13),
@@ -259,15 +278,6 @@ export default defineComponent({
 
         &:nth-child(7) {
           border-bottom: none;
-
-          &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 10px;
-            background: $color-primary;
-          }
         }
 
         &:nth-child(7),
