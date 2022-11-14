@@ -47,12 +47,6 @@ $search-icon-width: 21.45px;
   margin-top: -1px;
 
   div {
-    @media screen and (min-width: $breakpoint-medium) {
-      // display: none;
-    }
-  }
-
-  div {
     @media screen and (min-width: $breakpoint-large) {
       display: block;
     }

@@ -39,7 +39,7 @@ export default defineComponent({
 @import "@/Styles.scss";
 
 .details {
-  display: flex;
+  display: flex !important;
   align-items: center;
   margin-bottom: 24px;
 

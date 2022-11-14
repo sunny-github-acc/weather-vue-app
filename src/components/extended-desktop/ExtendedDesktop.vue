@@ -22,7 +22,7 @@
         class="thumb"
       >
         <div class="image-container">
-          <div class="now-pin">Now</div>
+          <div v-if="isNow" class="now-pin">Now</div>
           <img :src="getImage(conditionCode)" class="image" />
         </div>
         <div class="temperature">
