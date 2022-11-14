@@ -30,7 +30,7 @@
     <img class="image" :src="image" />
     <img class="image above" :src="image" />
     <div class="title">
-      {{ errorMessage ? "There seems to be a connection problem.." : null }}
+      {{ errorMessage ? "There seems to be a connection problem.." : "Loading might take a while.." }}
     </div>
   </div>
 </template>
