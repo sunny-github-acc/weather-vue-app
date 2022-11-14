@@ -55,7 +55,7 @@ export default defineComponent({
     Summary,
   },
   data: () => ({
-    url: ["http://localhost:8080/v1/places/", "/forecasts/long-term"],
+    url: ["http://localhost:3000/"],
     image: require("@/assets/images/day/clear.png"),
     errorMessage: "",
     longForecast: {} as IForecast,
@@ -96,7 +96,7 @@ export default defineComponent({
   methods: {
     searchLocation(input: string) {
       this.nextLoading = true;
-      fetchForecast(this.url[0] + input + this.url[1]).then(
+      fetchForecast(this.url + input).then(
         ({ data, errorMessage }) => {
           if (data) {
             const time = findTime();

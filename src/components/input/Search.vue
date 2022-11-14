@@ -51,7 +51,7 @@ export default defineComponent({
     location: "Klaipeda",
     places: [] as IPlaces[],
     filteredPlaces: [] as IPlaces[],
-    url: "http://localhost:8080/v1/places",
+    url: "http://localhost:3000",
     timeout: 0,
   }),
   computed: {
