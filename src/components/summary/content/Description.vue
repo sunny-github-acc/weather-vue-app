@@ -1,6 +1,6 @@
 <template>
   <div class="description">
-    Now it's {{ shortForecast?.conditionCode }} in
+    Now it's {{ shortForecast?.conditionCode.split("-").join(" ") }} in
     <span class="location">{{ shortForecast?.location }}</span>
   </div>
 </template>

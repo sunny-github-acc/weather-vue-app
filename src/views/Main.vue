@@ -55,7 +55,7 @@ export default defineComponent({
     Summary,
   },
   data: () => ({
-    url: ["http://localhost:3000/"],
+    url: ["https://weather-server-90jn.onrender.com/"],
     image: require("@/assets/images/day/clear.png"),
     errorMessage: "",
     longForecast: {} as IForecast,

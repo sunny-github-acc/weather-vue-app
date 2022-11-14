@@ -235,9 +235,10 @@ export default defineComponent({
     font: normal normal bold 25px/25px Nunito;
     transform: rotate(90deg);
     transition: all 0.3s;
+    opacity: 0.6;
 
     img {
-      height: 35px;
+    height: 35px;
     color: $color-primary-text;
     }
 

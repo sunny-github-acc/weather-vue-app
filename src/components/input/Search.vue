@@ -51,7 +51,7 @@ export default defineComponent({
     location: "Klaipeda",
     places: [] as IPlaces[],
     filteredPlaces: [] as IPlaces[],
-    url: "http://localhost:3000",
+    url: "https://weather-server-90jn.onrender.com/",
     timeout: 0,
   }),
   computed: {
@@ -220,7 +220,8 @@ $input-margin-bottom: 38px;
 
 .input-extention-container {
   position: relative;
-  top: calc(0px - $input-margin-bottom - 6.5px);
+  top: calc(0px - $input-margin-bottom);
+  max-width: 650px;
 
   .input-extention {
     position: absolute;
