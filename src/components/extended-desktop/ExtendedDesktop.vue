@@ -276,10 +276,6 @@ export default defineComponent({
           border-radius: 0 0 0 20px;
         }
 
-        &:nth-child(7) {
-          border-bottom: none;
-        }
-
         &:nth-child(7),
         &:nth-child(13),
         &:nth-child(19),
