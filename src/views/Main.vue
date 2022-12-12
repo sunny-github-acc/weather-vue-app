@@ -98,7 +98,7 @@ export default defineComponent({
       this.nextLoading = true;
       fetchForecast(this.url + input).then(
         ({ data, errorMessage }) => {
-          if (data) {
+          if (data?.place?.name) {
             const time = findTime();
             this.longForecast = data;
             this.shortForecast = {
@@ -110,7 +110,9 @@ export default defineComponent({
             this.initialLoading = false;
             this.errorMessage = "";
           } else {
-            this.errorMessage = errorMessage || "There seems to be a problem..";
+            const wrongLocation = "We could not find this location";
+            const serverError = "There seems to be a problem.."
+            this.errorMessage = errorMessage || data ? wrongLocation : serverError;
           }
           this.nextLoading = false;
         }
