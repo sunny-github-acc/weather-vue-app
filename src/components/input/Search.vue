@@ -47,7 +47,7 @@ import { IPlaces } from "@/models/Models";
 export default defineComponent({
   name: "SearchBar",
   data: () => ({
-    input: "",
+    input: "Klaipeda",
     location: "Klaipeda",
     places: [] as IPlaces[],
     filteredPlaces: [] as IPlaces[],
@@ -81,7 +81,7 @@ export default defineComponent({
       this.filteredPlaces = this.places
         .filter(
           ({ code }: { code: string }) =>
-            code.includes(this.input) && this.input !== ""
+            code.includes(this.input.toLowerCase()) && this.input !== ""
         )
         .sort((a, b) => a.name.length - b.name.length);
       this.location = this.input;
@@ -92,19 +92,19 @@ export default defineComponent({
         this.setErrorMessage("We could not find this location");
       }
     },
-    placeSuggestion(place: string, number: number) {
-      const uniqueString = "_" + Math.random().toString(36).substr(2, 9);
-      return place.replace(this.location, uniqueString).split(uniqueString)[
-        number
-      ];
+    placeSuggestion(place: string, index: number) {
+      return place
+              .replace(this.location.toLowerCase(), " ")
+              .split(" ")[index];
     },
     pickLocation(place: string) {
       this.input = this.location = place;
-      this.filteredPlaces = [];
       this.searchLocation();
     },
     searchLocation() {
       if (this.input) {
+        this.filteredPlaces = [];
+        this.setErrorMessage("");
         this.$emit("search-location", this.input);
       }
     },
