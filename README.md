@@ -1,6 +1,6 @@
 # vue-weather-app
 
-[weather.webm](https://github.com/sunny-github-acc/weather-vue-app/assets/54981869/5e4716d8-fb97-4e52-9d94-bfab6f884eab)
+[weather.webm](https://github.com/sunny-github-acc/weather-vue-app/assets/54981869/280a85d2-e051-48dc-80fe-0c06a5be0b61)
 
 ## Project setup
 ```
